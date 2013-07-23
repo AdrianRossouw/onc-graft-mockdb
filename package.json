@@ -13,9 +13,15 @@
     "url": "https://github.com/ONCHoldings/graft-mockdb/issues"
   },
   "devDependencies": {
-    "graftjs": "~0.0.1",
+    "backbone": "1.0.x",
+    "graftjs": "git+ssh://git@github.com:ONCHoldings/graft.js.git#master",
+    "underscore": "1.5.x",
     "mocha": "~1.12.0",
-    "should": "~1.2.2"
+    "debug": "~0.7.2",
+    "should": "~1.2.2",
+    "backbone.marionette": "~1.0.4",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt": "~0.4.1"
   },
   "dependencies": {
     "Nonsense": "~0.1.2",
