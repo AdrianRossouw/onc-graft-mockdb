@@ -75,14 +75,17 @@ _.extend(this, {
         var dfr = new $.Deferred();
         this.testData[col] ? dfr.resolve(this.testData[col]) : dfr.reject(404);
         return dfr.promise();
+    },
+    setupData: function() {
+        Graft.reqres.setHandler('model:read', this.readModel, this);
+        Graft.reqres.setHandler('model:update', this.updateModel, this);
+        Graft.reqres.setHandler('model:create', this.createModel, this);
+        Graft.reqres.setHandler('model:delete', this.deleteModel, this);
+        Graft.reqres.setHandler('collection:read', this.readCollection, this);
     }
 });
 
 this.addInitializer(function(opts) {
     debug("adding handler for reading models");
-    Graft.reqres.setHandler('model:read', this.readModel, this);
-    Graft.reqres.setHandler('model:update', this.updateModel, this);
-    Graft.reqres.setHandler('model:create', this.createModel, this);
-    Graft.reqres.setHandler('model:delete', this.deleteModel, this);
-    Graft.reqres.setHandler('collection:read', this.readCollection, this);
+    Graft.commands.setHandler('data:setup', this.setupData, this);
 });
