@@ -2,7 +2,7 @@
 // a simple in-memory data adapter for tests.
 var ns = new (require('Nonsense'))();
 
-this.testData = {} 
+this.testData = {};
 
 this.findModel = function(model, id) {
     var dfr = new $.Deferred();
@@ -15,7 +15,7 @@ this.findModel = function(model, id) {
     }
 
     return dfr.promise();
-}
+};
 
 _.extend(this, {
     readModel: function readModel(model, id) {
@@ -37,7 +37,7 @@ _.extend(this, {
         return dfr.promise();
     },
     createModel: function(model, data) {
-       debug('createModel :', model, data);
+        debug('createModel :', model, data);
         var dfr = new $.Deferred();
 
         var data = _.clone(data);
