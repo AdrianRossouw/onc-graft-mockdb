@@ -5,7 +5,7 @@ var ns = new (require('Nonsense'))();
 this.testData = {};
 
 this.findModel = function(model, id) {
-    var dfr = new $.Deferred();
+    var dfr = new _.Deferred();
 
     if (!this.testData[model] || !id) {
         dfr.reject(405, 'no model or id');
@@ -24,7 +24,7 @@ _.extend(this, {
     },
     updateModel: function readModel(model, id, data) {
         debug('updateModel :', model, id);
-        var dfr = new $.Deferred();
+        var dfr = new _.Deferred();
 
         var data = _.clone(data);
 
@@ -38,7 +38,7 @@ _.extend(this, {
     },
     createModel: function(model, data) {
         debug('createModel :', model, data);
-        var dfr = new $.Deferred();
+        var dfr = new _.Deferred();
 
         var data = _.clone(data);
 
@@ -58,7 +58,7 @@ _.extend(this, {
         return dfr.promise();
     },
     deleteModel: function(model, id) {
-        var dfr = new $.Deferred();
+        var dfr = new _.Deferred();
 
         function deleteModel(m) {
             var ind = _(this.testData[model]).indexOf(m);
@@ -72,7 +72,7 @@ _.extend(this, {
     },
     readCollection: function readModel(col) {
         debug('read collection ' + col);
-        var dfr = new $.Deferred();
+        var dfr = new _.Deferred();
         this.testData[col] ? dfr.resolve(this.testData[col]) : dfr.reject(404);
         return dfr.promise();
     },
