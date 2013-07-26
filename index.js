@@ -1,1 +1,1 @@
-module.exports = require('./middleware/Data.Mock.graft.js');
+module.exports = require('./data/Mock.graft.js');
