@@ -2,7 +2,7 @@
   "name": "graft-mockdb",
   "version": "0.0.1",
   "description": "Dummy data adaptor for Graft.js",
-  "main": "index.js",
+  "main": "server.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/ONCHoldings/graft-mockdb.git"
