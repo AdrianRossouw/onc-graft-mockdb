@@ -18,12 +18,12 @@ this.findModel = function(model, id) {
 };
 
 _.extend(this, {
-    readModel: function readModel(model, id) {
-        debug('readModel :', model, id);
-        return this.findModel(model, id); 
+    readModel: function readModel(name, model, id) {
+        debug('readModel :', name, id);
+        return this.findModel(name, id); 
     },
-    updateModel: function readModel(model, id, data) {
-        debug('updateModel :', model, id);
+    updateModel: function readModel(name, model, id, data) {
+        debug('updateModel :', name, id);
         var dfr = new _.Deferred();
 
         var data = _.clone(data);
@@ -32,12 +32,12 @@ _.extend(this, {
             _.extend(m, data);
             dfr.resolve(m);
         }
-        this.findModel(model, id).then(updateModel, dfr.reject);
+        this.findModel(name, id).then(updateModel, dfr.reject);
 
         return dfr.promise();
     },
-    createModel: function(model, data) {
-        debug('createModel :', model, data);
+    createModel: function(name, model, data) {
+        debug('createModel :', name, data);
         var dfr = new _.Deferred();
 
         var data = _.clone(data);
@@ -49,31 +49,31 @@ _.extend(this, {
         // we dont want the model to exist
         function createModel(err, reason) {
             _.extend(data, { id: ns.uuid() });
-            this.testData[model].push(data);
+            this.testData[name].push(data);
             dfr.resolve(data);
         }
 
-        this.findModel(model, data.id).then(modelExists, _.bind(createModel, this));
+        this.findModel(name, data.id).then(modelExists, _.bind(createModel, this));
 
         return dfr.promise();
     },
-    deleteModel: function(model, id) {
+    deleteModel: function(name, model, id) {
         var dfr = new _.Deferred();
 
         function deleteModel(m) {
-            var ind = _(this.testData[model]).indexOf(m);
-            this.testData[model].splice(ind, 1);
+            var ind = _(this.testData[name]).indexOf(m);
+            this.testData[name].splice(ind, 1);
 
             dfr.resolve(204);
         }
 
-        this.findModel(model, id).then(_.bind(deleteModel, this), dfr.reject);
+        this.findModel(name, id).then(_.bind(deleteModel, this), dfr.reject);
         return dfr.promise();
     },
-    readCollection: function readModel(col) {
-        debug('read collection ' + col);
+    readCollection: function readModel(name, col) {
+        debug('read collection ' + name);
         var dfr = new _.Deferred();
-        this.testData[col] ? dfr.resolve(this.testData[col]) : dfr.reject(404);
+        this.testData[name] ? dfr.resolve(this.testData[name]) : dfr.reject(404);
         return dfr.promise();
     },
     setupData: function() {
